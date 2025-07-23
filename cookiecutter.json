@@ -1,0 +1,12 @@
+{
+  "project_name": "My Statistical Project",
+  "remote_repository": "",
+  "repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+  "author_name": "Giuseppe Minardi",
+  "author_email": "{{ cookiecutter.author_name.title().replace(' ', '') + '@gmail.com' }}",
+  "description": "A statistical analysis project.",
+  "version": "0.1.0",
+  "_copy_without_render": [
+        "*.yml"
+    ]
+}
