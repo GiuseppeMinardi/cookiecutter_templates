@@ -21,7 +21,7 @@ jobs:
           apt-get update
           apt-get install -y --no-install-recommends git
           tlmgr update --self
-          tlmgr install fontawesome5 fourier babel-english subcaption adjustbox booktabs xcolor titlesec titletoc csquotes hyperref listings sidecap
+          tlmgr install fontawesome5 fourier 
 
       - name: Compile LaTeX document (1st pass)
         working-directory: reports
