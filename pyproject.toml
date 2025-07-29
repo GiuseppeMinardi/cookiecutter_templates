@@ -1,0 +1,141 @@
+[project]
+name = "personal-cookiecutter-templates"
+version = "1.0.0"
+description = "A collection of personal cookiecutter templates for data science projects."
+authors = [
+    { name = "Giuseppe Minardi", email = "giuseppe.minardi95@gmail.com" },
+]
+readme = "README.md"
+keywords = ["statistics", "analysis", "data-science"]
+
+
+[tool.ruff]
+# Set the maximum line length to 88 (black's default)
+line-length = 88
+
+
+# Enable additional rules beyond the defaults
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # Pyflakes
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+    "I",    # isort
+    "N",    # pep8-naming
+    "C4",   # flake8-comprehensions
+    "ICN",  # flake8-import-conventions
+    "PIE",  # flake8-pie
+    "PYI",  # flake8-pyi
+    "PT",   # flake8-pytest-style
+    "RET",  # flake8-return
+    "RSE",  # flake8-raise
+    "SLF",  # flake8-self
+    "TID",  # flake8-tidy-imports
+    "ERA",  # eradicate (commented code)
+    "PD",   # pandas-vet
+    "NPY",  # numpy-specific rules
+]
+
+# Ignore specific rules that are too restrictive for data science
+ignore = [
+    "E501",    # Line too long (handled by line-length setting)
+    "B008",    # Do not perform function calls in argument defaults (common in ML)
+    "B905",    # zip() without an explicit strict= parameter
+    "N803",    # Argument name should be lowercase (common to use X, y in ML)
+    "N806",    # Variable in function should be lowercase (common to use X, y, df)
+    "PD901",   # Avoid using the generic variable name `df` for DataFrames
+    "RET504",  # Unnecessary variable assignment before return
+    "SIM108",  # Use ternary operator (sometimes less readable)
+    "ERA001",  # Found commented-out code (sometimes needed for experiments)
+]
+
+# Exclude common data science directories and files
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "data/",
+    "notebooks/archive/",
+    "*.ipynb",  # Jupyter notebooks (use nbqa-ruff for notebooks)
+]
+
+[tool.ruff.per-file-ignores]
+# Ignore import rules in __init__.py files
+"__init__.py" = ["F401", "F403"]
+# More lenient rules for test files
+"tests/**" = ["S101", "PLR2004", "SLF001"]
+# More lenient rules for scripts and exploratory files
+"scripts/**" = ["T201", "S101", "PLR2004"]
+"explore/**" = ["T201", "S101", "PLR2004", "B018"]
+
+[tool.ruff.isort]
+# Configure import sorting for data science
+known-first-party = ["src"]
+section-order = [
+    "future",
+    "standard-library", 
+    "third-party",
+    "data-science",
+    "first-party",
+    "local-folder"
+]
+
+[tool.ruff.isort.sections]
+# Group common data science libraries together
+"data-science" = [
+    "numpy",
+    "pandas", 
+    "matplotlib",
+    "seaborn",
+    "plotly",
+    "sklearn",
+    "scipy",
+    "statsmodels",
+    "xgboost",
+    "lightgbm",
+    "catboost",
+    "tensorflow",
+    "torch",
+    "transformers",
+]
+
+[tool.ruff.flake8-import-conventions]
+# Standard aliases for data science libraries
+[tool.ruff.flake8-import-conventions.aliases]
+"matplotlib.pyplot" = "plt"
+"numpy" = "np"
+"pandas" = "pd"
+"seaborn" = "sns"
+"sklearn" = "sk"
+"tensorflow" = "tf"
+"torch" = "torch"
+
+[tool.ruff.format]
+# Use single quotes for strings
+quote-style = "double"
+# Indent with spaces
+indent-style = "space"
+# Respect magic trailing comma
+skip-magic-trailing-comma = false
+# Automatically detect line ending
+line-ending = "auto"

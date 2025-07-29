@@ -1,7 +1,7 @@
 {
+  "repo_git_ssh_url": "",
   "project_name": "My Statistical Project",
-  "remote_repository": "",
-  "repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+  "repo_name": "{{ cookiecutter.repo_git_ssh_url.split('/')[-1].replace('.git', '') or cookiecutter.project_name.replace(' ', '_').lower() }}",
   "author_name": "Giuseppe Minardi",
   "author_email": "{{ cookiecutter.author_name.title().replace(' ', '') + '@gmail.com' }}",
   "description": "A statistical analysis project.",
