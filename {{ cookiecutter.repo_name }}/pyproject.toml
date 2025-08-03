@@ -66,12 +66,29 @@ convention = "numpy"
 
 [tool.ruff.per-file-ignores]
 # Ignore import rules in __init__.py files
-"__init__.py" = ["F401", "F403"]
+"__init__.py" = [
+    "F401", 
+    "F403",
+    "D104",  # Missing docstring in public package
+]
 # More lenient rules for test files
-"tests/**" = ["S101", "PLR2004", "SLF001"]
+"tests/**" = [
+    "S101",
+    "PLR2004", 
+    "SLF001"
+]
 # More lenient rules for scripts and exploratory files
-"scripts/**" = ["T201", "S101", "PLR2004"]
-"explore/**" = ["T201", "S101", "PLR2004", "B018"]
+"scripts/**" = [
+    "T201", 
+    "S101", 
+    "PLR2004"
+]
+"explore/**" = [
+    "T201", 
+    "S101", 
+    "PLR2004", 
+    "B018"
+]
 
 [tool.ruff.isort]
 # Configure import sorting for data science
