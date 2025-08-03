@@ -16,39 +16,22 @@ line-length = 88
 
 # Enable additional rules beyond the defaults
 select = [
+    "D",    # pydocstyle
     "E",    # pycodestyle errors
-    "W",    # pycodestyle warnings
     "F",    # Pyflakes
-    "UP",   # pyupgrade
     "B",    # flake8-bugbear
-    "SIM",  # flake8-simplify
+    "PD",   # pandas-vet
     "I",    # isort
     "N",    # pep8-naming
-    "C4",   # flake8-comprehensions
-    "ICN",  # flake8-import-conventions
-    "PIE",  # flake8-pie
-    "PYI",  # flake8-pyi
-    "PT",   # flake8-pytest-style
-    "RET",  # flake8-return
-    "RSE",  # flake8-raise
-    "SLF",  # flake8-self
-    "TID",  # flake8-tidy-imports
-    "ERA",  # eradicate (commented code)
-    "PD",   # pandas-vet
-    "NPY",  # numpy-specific rules
+    "SIM",
+    "Q",
+    "E305",
+    "C90"
 ]
 
 # Ignore specific rules that are too restrictive for data science
 ignore = [
     "E501",    # Line too long (handled by line-length setting)
-    "B008",    # Do not perform function calls in argument defaults (common in ML)
-    "B905",    # zip() without an explicit strict= parameter
-    "N803",    # Argument name should be lowercase (common to use X, y in ML)
-    "N806",    # Variable in function should be lowercase (common to use X, y, df)
-    "PD901",   # Avoid using the generic variable name `df` for DataFrames
-    "RET504",  # Unnecessary variable assignment before return
-    "SIM108",  # Use ternary operator (sometimes less readable)
-    "ERA001",  # Found commented-out code (sometimes needed for experiments)
 ]
 
 # Exclude common data science directories and files
@@ -76,8 +59,10 @@ exclude = [
     "venv",
     "data/",
     "notebooks/archive/",
-    "*.ipynb",  # Jupyter notebooks (use nbqa-ruff for notebooks)
 ]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
 
 [tool.ruff.per-file-ignores]
 # Ignore import rules in __init__.py files
@@ -119,6 +104,11 @@ section-order = [
     "transformers",
 ]
 
+"visualization" = [
+    "matplotlib.pyplot",
+    "seaborn",
+]
+
 [tool.ruff.flake8-import-conventions]
 # Standard aliases for data science libraries
 [tool.ruff.flake8-import-conventions.aliases]
@@ -129,6 +119,10 @@ section-order = [
 "sklearn" = "sk"
 "tensorflow" = "tf"
 "torch" = "torch"
+"pymc" = "pm"
+"arviz" = "az"
+"statsmodels" = "sm"
+
 
 [tool.ruff.format]
 # Use single quotes for strings
@@ -139,3 +133,5 @@ indent-style = "space"
 skip-magic-trailing-comma = false
 # Automatically detect line ending
 line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = 88
