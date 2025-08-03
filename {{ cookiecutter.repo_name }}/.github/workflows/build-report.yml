@@ -8,47 +8,53 @@ jobs:
   build_latex:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Required to commit the PDF back to the repo
+      contents: write  # Required to push PDF back to repo
     container:
-      image: texlive/texlive:latest-full
+      image: texlive/texlive:20240314-full  # Pinned for reproducibility
+
+    env:
+      REPORT_NAME: report.tex
+      OUTPUT_NAME: report.pdf
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install LaTeX packages
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends git
-          tlmgr update --self
-          tlmgr install fontawesome5 fourier 
-
       - name: Compile LaTeX document (1st pass)
         working-directory: reports
-        run: xelatex -interaction=nonstopmode -file-line-error report.tex
+        run: xelatex -interaction=nonstopmode -file-line-error $REPORT_NAME
 
       - name: Compile LaTeX document (2nd pass)
         working-directory: reports
-        run: xelatex -interaction=nonstopmode -file-line-error report.tex
+        run: xelatex -interaction=nonstopmode -file-line-error $REPORT_NAME
 
       - name: Upload PDF as artifact
         uses: actions/upload-artifact@v4
         with:
           name: Statistical_Report_PDF
-          path: reports/report.pdf
+          path: reports/${{ env.OUTPUT_NAME }}
 
-      - name: Create output directory and copy PDF
+      - name: Upload LaTeX logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: LaTeX_Logs
+          path: reports/*.log
+
+      - name: Prepare output files
         run: |
           mkdir -p output
-          cp reports/report.pdf output/report.pdf
-          cp reports/report.pdf output/report_latest.pdf
+          cp reports/$OUTPUT_NAME output/report.pdf
+          cp reports/$OUTPUT_NAME output/report_latest.pdf
 
       - name: Commit PDF to repository
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
           git config --global --add safe.directory "${GITHUB_WORKSPACE}"
-          git add reports/report.pdf output/*
+
+          git add output/report.pdf output/report_latest.pdf reports/report.pdf
           git diff --staged --quiet || git commit -m "Update compiled report [skip ci]"
+
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git push
