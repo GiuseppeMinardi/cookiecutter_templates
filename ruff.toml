@@ -20,6 +20,7 @@ select = [
 # Ignore specific rules that are too restrictive for data science
 ignore = [
     "E501",    # Line too long (handled by line-length setting)
+    "D401"
 ]
 
 # Exclude common data science directories and files
