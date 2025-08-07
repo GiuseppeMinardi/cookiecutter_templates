@@ -21,31 +21,31 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Compile LaTeX document (1st pass)
-        working-directory: reports
+        working-directory: report
         run: xelatex -interaction=nonstopmode -file-line-error $REPORT_NAME
 
       - name: Compile LaTeX document (2nd pass)
-        working-directory: reports
+        working-directory: report
         run: xelatex -interaction=nonstopmode -file-line-error $REPORT_NAME
 
       - name: Upload PDF as artifact
         uses: actions/upload-artifact@v4
         with:
           name: Statistical_Report_PDF
-          path: reports/${{ env.OUTPUT_NAME }}
+          path: report/${{ env.OUTPUT_NAME }}
 
       - name: Upload LaTeX logs on failure
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: LaTeX_Logs
-          path: reports/*.log
+          path: report/*.log
 
       - name: Prepare output files
         run: |
           mkdir -p output
-          cp reports/$OUTPUT_NAME output/report.pdf
-          cp reports/$OUTPUT_NAME output/report_latest.pdf
+          cp report/$OUTPUT_NAME output/report.pdf
+          cp report/$OUTPUT_NAME output/report_latest.pdf
 
       - name: Commit PDF to repository
         run: |
@@ -53,7 +53,7 @@ jobs:
           git config --global user.email 'actions@github.com'
           git config --global --add safe.directory "${GITHUB_WORKSPACE}"
 
-          git add output/report.pdf output/report_latest.pdf reports/report.pdf
+          git add output/report.pdf output/report_latest.pdf report/report.pdf
           git diff --staged --quiet || git commit -m "Update compiled report [skip ci]"
 
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}

@@ -4,7 +4,7 @@
 
 ## Project Structure
 
-```
+```plain
 .
 ├── data/                 # Data storage
 │   ├── external/         # Data from external sources
@@ -14,11 +14,18 @@
 ├── report/               # LaTeX reporting
 │   ├── figures/          # Generated plots
 │   ├── tables/           # Generated tables
+│   └── report.pdf        # PDF report
 │   └── report.tex        # LaTeX template
-├── {{ cookiecutter.repo_name }}/  # Python package for reusable code
+├── src/                  # Python package for reusable code
+├── logs/                 # Logs of the package
 ├── environment.yml       # Conda environment
+├── plot_style.mlpstyle   # Personal style for the plots
+├── ruff.toml             # Ruff configurations
 └── pyproject.toml        # Python project configuration
 ```
+
+All folders starting with a dot (e.g. `.github`) are configurations folders and should not be considered.
+ The important folder is `report` since it contains the final report and `report/figures` since it contains all the figures produced in high quality.
 
 ## Setup
 
@@ -35,7 +42,7 @@ conda activate {{ cookiecutter.repo_name }}
 
 ## Usage
 
-1. **Data Storage**: 
+1. **Data Storage**:
    - Place raw data in `data/raw/`
    - Store external data in `data/external/`
    - Save processed datasets in `data/processed/`
@@ -50,6 +57,7 @@ conda activate {{ cookiecutter.repo_name }}
    - Save tables to `report/tables/`
    - Edit `report/report.tex` to document your findings
    - Compile the LaTeX report using your preferred LaTeX editor or command line:
+
      ```bash
      cd report
      pdflatex report.tex
@@ -58,6 +66,7 @@ conda activate {{ cookiecutter.repo_name }}
 ## Statistical Tools
 
 This project is set up with:
+
 - PyMC and ArviZ for Bayesian modeling
 - NumPy, SciPy, pandas for data manipulation
 - scikit-learn for machine learning
