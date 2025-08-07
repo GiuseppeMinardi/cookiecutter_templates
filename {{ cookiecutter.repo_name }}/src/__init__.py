@@ -1,7 +1,7 @@
 import logging
 from logging.config import dictConfig
 
-from .config import LoggerConfiguration, ProjectPaths
+from .project_configs import LoggerConfiguration, ProjectPaths
 
 # Setup paths
 project_paths: ProjectPaths = ProjectPaths()
