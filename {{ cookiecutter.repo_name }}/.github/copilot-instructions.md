@@ -5,7 +5,7 @@ applyTo: "**"
 # Data Science Project: {{cookiecutter.project_name}} Coding Standards
 
 ## What this project is about
-{{ cookiecutter.project_description }}
+{{ cookiecutter.description }}
 
 ## General Guidelines
 - Always use type hints for function signatures and variables.
