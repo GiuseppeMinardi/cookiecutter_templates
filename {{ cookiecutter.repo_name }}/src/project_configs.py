@@ -9,7 +9,7 @@ from datetime import datetime
 from pathlib import Path
 
 from pydantic import DirectoryPath, Field, PositiveInt
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings
 
 
 class ProjectPaths(BaseSettings):
@@ -19,12 +19,6 @@ class ProjectPaths(BaseSettings):
     This module defines paths to various folders and sets up the project
     configuration using Pydantic settings.
     """
-
-    settings_config = SettingsConfigDict(
-        env_file=".env",
-        env_file_encoding="utf-8",
-        extra="ignore",  # Ignore extra fields not defined in the model
-    )
 
     root: DirectoryPath = Path(__file__).resolve().parents[1]
 
