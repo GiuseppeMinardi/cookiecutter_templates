@@ -8,10 +8,11 @@ The project is going to be stored in {{cookiecutter.repo_git_ssh_url}}. Do the f
 
 ```plain
 git init
-git checkout -b develop
-git add .
-git commit -m first commit
-git push --set-upstream origin develop
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin {{cookiecutter.repo_git_ssh_url}}
+git push -u origin main
 ```
 
 ## Project Structure
