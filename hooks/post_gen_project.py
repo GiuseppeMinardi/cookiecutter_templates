@@ -75,58 +75,8 @@ def install_packages(packages: list[str], dev: bool = False):
         sys.exit(1)
 
 
-def setup_git_repository(git_url: str):
-    """Set up a Git repository and push to the remote."""
-    if not github_url_pattern.match(git_url):
-        print("Error: The provided URL is not a valid GitHub URL.")
-        sys.exit(1)
-
-    try:
-        subprocess.run(["git", "init"], cwd=root_folder.as_posix(), check=True)
-        subprocess.run(
-            ["git", "remote", "add", "origin", git_url],
-            cwd=root_folder.as_posix(),
-            check=True,
-        )
-        print("Git repository initialized and remote origin set.")
-
-        subprocess.run(
-            ["git", "checkout", "-b", "develop"],
-            cwd=root_folder.as_posix(),
-            check=True,
-        )
-        print("Develop branch created.")
-
-        subprocess.run(
-            ["git", "add", "."],
-            cwd=root_folder.as_posix(),
-            check=True,
-        )
-        subprocess.run(
-            ["git", "commit", "-m", "first commit"],
-            cwd=root_folder.as_posix(),
-            check=True,
-        )
-        subprocess.run(
-            ["git", "push", "-u", "origin", "develop"],
-            cwd=root_folder.as_posix(),
-            check=True,
-        )
-        print("Pushed to remote develop branch.")
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred during Git operations: {e}")
-        sys.exit(1)
-
-
 def main():
     """Main function to execute post-generation tasks."""
-    git_repo_url = "{{cookiecutter.repo_git_ssh_url}}"
-    if git_repo_url:
-        print("Initializing Git repo.")
-        setup_git_repository(git_repo_url)
-    else:
-        print("No GitHub repo provided.")
-
     print("Installing packages...")
     install_packages(data_science_packages)
 

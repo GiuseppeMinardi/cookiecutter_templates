@@ -2,6 +2,18 @@
 
 {{ cookiecutter.description }}
 
+## Git
+
+The project is going to be stored in {{cookiecutter.repo_git_ssh_url}}. Do the following to initialize the repo:
+
+```plain
+git init
+git checkout -b develop
+git add .
+git commit -m first commit
+git push --set-upstream origin develop
+```
+
 ## Project Structure
 
 ```plain
