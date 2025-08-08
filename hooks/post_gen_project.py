@@ -1,6 +1,6 @@
 """Post generation script to install data science packages using uv."""
+
 import json
-import re
 import subprocess
 import sys
 from pathlib import Path
@@ -10,10 +10,6 @@ from typing import Optional
 # Define the root folder as the current working directory
 root_folder: Path = Path.cwd()
 
-# Regex pattern for validating GitHub URLs
-github_url_pattern: re.Pattern[str] = re.compile(
-    pattern=r"^(https?://)?(www\.)?github\.com/.*$"
-)
 
 # Lists of packages to install
 data_science_packages = [
@@ -85,6 +81,7 @@ def main():
 
     print("Customizing VSCode...")
     customize_titlebar_color()
+
 
 if __name__ == "__main__":
     main()
