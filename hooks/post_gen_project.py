@@ -10,6 +10,7 @@ from typing import Optional
 # Define the root folder as the current working directory
 root_folder: Path = Path.cwd()
 
+other_packages = ["pydantic", "pydantic-settings"]
 
 # Lists of packages to install
 data_science_packages = [
@@ -75,6 +76,9 @@ def main():
     """Main function to execute post-generation tasks."""
     print("Installing packages...")
     install_packages(data_science_packages)
+
+    print("Installing packages...")
+    install_packages(other_packages)
 
     print("Installing dev packages...")
     install_packages(dev_packages, dev=True)

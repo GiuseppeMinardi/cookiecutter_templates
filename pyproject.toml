@@ -7,3 +7,7 @@ authors = [
 ]
 readme = "README.md"
 keywords = ["statistics", "analysis", "data-science"]
+dependencies = [
+    "pydantic>=2.11.7",
+    "pydantic-settings>=2.10.1",
+]
