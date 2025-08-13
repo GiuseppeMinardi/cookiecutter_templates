@@ -74,14 +74,17 @@ def install_packages(packages: list[str], dev: bool = False):
 
 def main():
     """Main function to execute post-generation tasks."""
-    print("Installing packages...")
-    install_packages(data_science_packages)
+    if "{{cookiecutter.setup_environment}}" == "y":
+        print("Installing packages...")
+        install_packages(data_science_packages)
 
-    print("Installing packages...")
-    install_packages(other_packages)
+        print("Installing packages...")
+        install_packages(other_packages)
 
-    print("Installing dev packages...")
-    install_packages(dev_packages, dev=True)
+        print("Installing dev packages...")
+        install_packages(dev_packages, dev=True)
+    else:
+        print("Not setting up the environment...")
 
     print("Customizing VSCode...")
     customize_titlebar_color()

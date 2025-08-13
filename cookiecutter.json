@@ -6,6 +6,7 @@
   "author_email": "{{ cookiecutter.author_name.title().replace(' ', '') + '@gmail.com' }}",
   "description": "A statistical analysis project.",
   "version": "0.1.0",
+  "setup_environment": ["y", "n"],
   "_copy_without_render": [
         "*.yml"
     ]

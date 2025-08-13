@@ -62,9 +62,6 @@ convention = "numpy"
 ]
 # More lenient rules for test files
 "tests/**" = ["S101", "PLR2004", "SLF001"]
-# More lenient rules for scripts and exploratory files
-"scripts/**" = ["T201", "S101", "PLR2004"]
-"explore/**" = ["T201", "S101", "PLR2004", "B018"]
 
 [isort]
 # Configure import sorting for data science
