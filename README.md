@@ -8,6 +8,7 @@ A [Cookiecutter](https://github.com/cookiecutter/cookiecutter) template for stat
 - **Professional LaTeX Reporting**: Ready-to-use LaTeX template with automated PDF building via GitHub Actions
 - **Organized Project Structure**: Clear separation of data, code, and documentation
 - **Modern Python Package Management**: Automatic package installation using uv
+- **Input Validation**: Robust parameter validation during project creation to prevent common issues
 - **VSCode Integration**: Custom workspace settings including titlebar color customization
 - **Plotting Style**: Custom matplotlib style configuration for consistent visualizations
 - **Structured Configuration**: Pydantic-based project configuration and logging setup
@@ -41,8 +42,36 @@ You'll be prompted to enter information about your project:
 - `project_name`: Name of your statistical project
 - `author_name`: Your name
 - `author_email`: Your email (auto-generated if not provided)
-- `description`: Brief description of the project
+- `description`: Brief description of the project (limited to 100 characters)
 - `version`: Initial version number (default: 0.1.0)
+
+### Input Validation
+
+The template includes comprehensive validation to prevent common issues when creating projects:
+
+- **Repository Name Validation**:
+  - Ensures the name follows Python package naming conventions
+  - Verifies it contains only letters, numbers, and underscores
+  - Confirms it starts with a letter or underscore
+
+- **Project Name Validation**:
+  - Checks for characters that might cause issues in file paths
+  - Prevents creation with empty project names
+
+- **Email Validation**:
+  - Validates author email format if provided
+
+- **Description Length Check**:
+  - Ensures project descriptions don't exceed 100 characters
+
+- **Python Version Check**:
+  - Verifies your Python version meets the minimum requirement (3.12+)
+
+- **PyPI Conflict Detection**:
+  - Checks if your repository name already exists on PyPI
+  - Warns about potential naming conflicts
+
+These validations help you avoid common pitfalls that could cause issues later in your project's lifecycle, such as problems with package distribution, path handling, or naming conflicts.
 
 ### Project Structure
 
