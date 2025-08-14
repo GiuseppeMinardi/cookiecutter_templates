@@ -125,10 +125,9 @@ def test_project_creation(  # noqa: D103
         report = f.read()
         assert author_name in report
         assert description in report
-    
+
+    uv_lock = created_repo_path.joinpath("uv.lock")
     if setup_environment == "y":
-        uv_lock = created_repo_path.joinpath("uv.lock")
         assert uv_lock.is_file()
-
-
-
+    else:
+        assert not uv_lock.exists()

@@ -113,7 +113,10 @@ class DataFolderSettings(BaseSettings):
         ValueError
             If `data_root` is missing or of the wrong type.
         """
-        root_folder: str | Path = values.get("data_root")
+        root_folder: str | Path | None = values.get("data_root")
+        if not root_folder:
+            raise ValueError("Root folder should be present.")
+
         if not root_folder:
             raise ValueError("data_root folder cannot be None")
         elif isinstance(root_folder, str):
@@ -196,7 +199,7 @@ class ReportFolderSettings(BaseSettings):
         ValueError
             If `report_root` is missing or of the wrong type.
         """
-        root_folder: str | Path = values.get("report_root")
+        root_folder: str | Path | None = values.get("report_root")
         if not root_folder:
             raise ValueError("report_root folder cannot be None")
         elif isinstance(root_folder, str):
