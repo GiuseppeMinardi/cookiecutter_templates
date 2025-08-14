@@ -9,9 +9,3 @@ readme = "README.md"
 keywords = ["statistics", "analysis", "data-science"]
 
 requires-python = ">=3.12"
-
-
-[tool.ty.src]
-exclude = [
-    "notebooks",
-]
