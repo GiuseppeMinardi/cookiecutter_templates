@@ -10,7 +10,7 @@ from typing import Optional
 # Define the root folder as the current working directory
 root_folder: Path = Path.cwd()
 
-other_packages = ["pydantic", "pydantic-settings"]
+other_packages = ["pydantic", "pydantic-settings", "cool-styles"]
 
 # Lists of packages to install
 data_science_packages = [

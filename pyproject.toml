@@ -15,5 +15,6 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "cool-styles>=0.1.0",
     "pytest>=8.4.1",
 ]
