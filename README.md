@@ -115,6 +115,19 @@ After generating your project:
 5. Generate your report using LaTeX in the `report/` directory
 6. Push your changes to GitHub to trigger automatic report building (PDF generation)
 
+Editable install for development
+
+To make the package available to notebooks and allow imports without modifying
+`sys.path`, install the project in editable mode from the project root:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -e .
+```
+
+If you use `uv` for environment management the equivalent is to run an editable
+installation step via your preferred workflow or run `uv add -e .` if supported.
+
 ### Statistical Capabilities
 
 The template includes these key libraries:

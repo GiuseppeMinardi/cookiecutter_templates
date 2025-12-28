@@ -9,3 +9,11 @@ readme = "README.md"
 keywords = ["statistics", "analysis", "data-science"]
 
 requires-python = ">=3.12"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["{{ cookiecutter.repo_name }}*"]
