@@ -204,6 +204,8 @@ class ProjectPaths(BaseSettings):
 
 
 class LoggerConfiguration(BaseSettings):
+    """Configuration for project logging."""
+
     log_level: str = Field(default="INFO")
     log_name: str = Field(default="{{cookiecutter.repo_name}}")
     log_file_name: str = Field(default="{{cookiecutter.repo_name}}.log")
@@ -211,6 +213,7 @@ class LoggerConfiguration(BaseSettings):
     backup_count: PositiveInt = Field(default=5)
 
     def generate(self, log_dir: Path) -> dict:
+        """Generate logging configuration dictionary."""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         log_file_name = f"{timestamp}_{self.log_file_name}"
         log_path = log_dir / log_file_name
