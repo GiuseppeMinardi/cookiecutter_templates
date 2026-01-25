@@ -190,7 +190,7 @@ class ProjectPaths(BaseSettings):
 
     @model_validator(mode="before")
     @classmethod
-    def fill_fields(cls, values: dict) -> dict:
+    def _fill_fields(cls, values: dict) -> dict:
         if not (root_folder := values.get("root")):
             root_folder = Path(__file__).resolve().parents[2]
             values["root"] = root_folder

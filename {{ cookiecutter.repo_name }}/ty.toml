@@ -1,6 +1,0 @@
-[rules]
-unresolved-import = "ignore"
-
-[environment]
-python = "./.venv"
-root = ["."]

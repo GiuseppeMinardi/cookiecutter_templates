@@ -1,42 +1,48 @@
-name: ty type-check
+name: Report Pipeline
 
+# TRIGGER: Runs only when code is pushed to (or merged into) main
 on:
-  pull_request:
-    paths:
-      - 'src/**'
+  push:
+    branches:
+      - main
 
 jobs:
-  type-check:
-    name: Run Astral ty type checker
+  build-and-report:
+    name: Type Check & Generate PDF
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: '3.x'
+          version: "latest"
 
-      - name: Install uv (Astral tooling)
+      - name: Set up Python
+        run: uv python install
+
+      # 1. Type Check (mypy)
+      - name: Run Type Checker
+        run: uvx mypy src/
+
+      # 2. Install Project Dependencies
+      # This assumes you have a pyproject.toml or requirements.txt
+      - name: Install dependencies
+        run: uv sync  # Or 'uv pip install -r requirements.txt'
+
+      # 3. Generate PDF
+      # Ensure your script saves the file to report/output.pdf
+      - name: Generate PDF Report
         run: |
-          python -m pip install --upgrade pip
-          pip install uv
+          mkdir -p report
+          uv run python src/generate_pdf.py
 
-      - name: Install ty via uv
-        run: uvx install ty
-
-      - name: Verify ty version
-        run: ty --version || uvx ty --version
-
-      - name: Run ty type check on src/
-        run: |
-          uvx ty check src/
-
-      - name: Archive diagnostics (optional)
-        if: failure()
+      # 4. Upload Artifact
+      - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:
-          name: ty-diagnostics
-          path: src/  # You can tailor this path if ty outputs files elsewhere
+          name: project-report-pdf
+          path: report/*.pdf
+          retention-days: 5

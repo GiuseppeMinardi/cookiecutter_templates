@@ -14,8 +14,6 @@ other_packages = ["pydantic", "pydantic-settings", "cool-styles"]
 
 # Lists of packages to install
 data_science_packages = [
-    "pymc",
-    "arviz",
     "matplotlib",
     "numpy",
     "openpyxl",
@@ -23,7 +21,6 @@ data_science_packages = [
     "scikit-learn",
     "scipy",
     "seaborn",
-    "setuptools",
     "statsmodels",
 ]
 
