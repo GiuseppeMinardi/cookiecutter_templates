@@ -11,8 +11,8 @@ keywords = ["statistics", "analysis", "data-science"]
 requires-python = ">=3.12"
 
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["uv_build>=0.9.28,<0.10.0"]
+build-backend = "uv_build"
 
 [tool.setuptools.packages.find]
 where = ["src"]
