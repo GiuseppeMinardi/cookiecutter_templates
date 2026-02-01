@@ -20,29 +20,21 @@ jobs:
         with:
           version: "latest"
 
-      - name: Set up Python
+      - name: Install Python with uv
         run: uv python install
 
-      # 1. Type Check (mypy)
-      - name: Run Type Checker
+      - name: Sync project environment (install deps)
+        run: uv sync
+
+      - name: Format with ruff (via uvx)
+        run: uvx ruff format src/
+
+      - name: Run ruff lint (via uvx)
+        run: uvx ruff check src/
+
+      - name: Run Type Checker (via uvx)
         run: uvx mypy src/
 
-      # 2. Install Project Dependencies
-      # This assumes you have a pyproject.toml or requirements.txt
-      - name: Install dependencies
-        run: uv sync  # Or 'uv pip install -r requirements.txt'
-
-      # 3. Generate PDF
-      # Ensure your script saves the file to report/output.pdf
-      - name: Generate PDF Report
+      - name: Verify PDF exists
         run: |
-          mkdir -p report
-          uv run python src/generate_pdf.py
-
-      # 4. Upload Artifact
-      - name: Upload PDF
-        uses: actions/upload-artifact@v4
-        with:
-          name: project-report-pdf
-          path: report/*.pdf
-          retention-days: 5
+          if ls report/*.pdf 1> /dev/null 2>&1; then echo "PDF found"; else echo "No PDF found" && exit 1; fi
