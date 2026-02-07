@@ -38,3 +38,7 @@ jobs:
       - name: Verify PDF exists
         run: |
           if ls report/*.pdf 1> /dev/null 2>&1; then echo "PDF found"; else echo "No PDF found" && exit 1; fi
+
+      - name: Verify billing excel exists
+        run: |
+          if ls *.xlsx 1> /dev/null 2>&1; then echo "Excel found"; else echo "No Excel found" && exit 1; fi
