@@ -1,19 +1,18 @@
 """Test suite for calculate_hours module."""
 
-from pathlib import Path
-from io import StringIO
 import sys
+from pathlib import Path
 
-import pandas as pd
 import pytest
 from openpyxl import load_workbook
 
+import pandas as pd
 
 # We need to add the parent directory to sys.path to import the script
 SCRIPT_DIR = (Path(__file__).parent.parent / "{{ cookiecutter.repo_name }}").resolve()
 sys.path.insert(0, str(SCRIPT_DIR))
 
-from calculate_hours import load_csv, process_data, modify_excel, main
+from calculate_hours import load_csv, main, modify_excel, process_data
 
 
 @pytest.fixture
